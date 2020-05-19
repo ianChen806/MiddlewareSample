@@ -27,7 +27,7 @@ namespace MiddlewareSample
         {
             app.MapWhen(context =>
             {
-                return context.Request.Query.Keys.Any(r => r == "Test");
+                return context.Request.Query.Keys.Contains("Test");
             }, builder =>
             {
                 builder.Use(async (context, func) =>
