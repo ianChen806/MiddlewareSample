@@ -25,8 +25,6 @@ namespace MiddlewareSample
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseMyMiddleware();
-            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -24,6 +24,7 @@ namespace MiddlewareSample.Controllers
         }
 
         [HttpGet]
+        [MiddlewareFilter(typeof(MyMiddlewarePipeline))]
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();

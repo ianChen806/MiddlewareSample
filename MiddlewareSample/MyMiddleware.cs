@@ -31,4 +31,12 @@ namespace MiddlewareSample
             builder.UseMiddleware<MyMiddleware>();
         }
     }
+
+    public class MyMiddlewarePipeline
+    {
+        public void Configure(IApplicationBuilder app)
+        {
+            app.UseMiddleware<MyMiddleware>();
+        }
+    }
 }
