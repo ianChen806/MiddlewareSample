@@ -25,9 +25,12 @@ namespace MiddlewareSample
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.Use(async (context, func) =>
+            app.Map("/Test", builder =>
             {
-                await context.Response.WriteAsync("Hello World");
+                builder.Use(async (context, func) =>
+                {
+                    await context.Response.WriteAsync("Hello World");
+                });
             });
 
             if (env.IsDevelopment())
