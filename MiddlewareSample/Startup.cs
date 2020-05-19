@@ -25,7 +25,10 @@ namespace MiddlewareSample
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.Map("/Test", builder =>
+            app.MapWhen(context =>
+            {
+                return context.Request.Query.Keys.Any(r => r == "Test");
+            }, builder =>
             {
                 builder.Use(async (context, func) =>
                 {
