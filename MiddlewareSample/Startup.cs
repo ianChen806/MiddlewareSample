@@ -25,23 +25,8 @@ namespace MiddlewareSample
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.MapWhen(context =>
-            {
-                return context.Request.Query.Keys.Contains("Test");
-            }, builder =>
-            {
-                builder.Use(async (context, next) =>
-                {
-                    await context.Response.WriteAsync("Hello World");
-                    await next();
-                });
-
-                builder.Run(async context =>
-                {
-                    await context.Response.WriteAsync("End");
-                });
-            });
-
+            app.UseMyMiddleware();
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
