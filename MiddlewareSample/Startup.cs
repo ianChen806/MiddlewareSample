@@ -30,9 +30,15 @@ namespace MiddlewareSample
                 return context.Request.Query.Keys.Contains("Test");
             }, builder =>
             {
-                builder.Use(async (context, func) =>
+                builder.Use(async (context, next) =>
                 {
                     await context.Response.WriteAsync("Hello World");
+                    await next();
+                });
+
+                builder.Run(async context =>
+                {
+                    await context.Response.WriteAsync("End");
                 });
             });
 
