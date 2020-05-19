@@ -14,7 +14,7 @@ namespace MiddlewareSample
             _next = next;
         }
 
-        public async Task InvokeAsync(HttpContext context)
+        public async Task Invoke(HttpContext context)
         {
             Console.WriteLine("Stat");
 
