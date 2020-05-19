@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -22,13 +23,13 @@ namespace MiddlewareSample
 
         public IConfiguration Configuration { get; }
 
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddControllers();
-        }
-
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.Use(async (context, func) =>
+            {
+                await context.Response.WriteAsync("Hello World");
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -44,6 +45,11 @@ namespace MiddlewareSample
             {
                 endpoints.MapControllers();
             });
+        }
+
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddControllers();
         }
     }
 }
